@@ -7,6 +7,7 @@ Sistema de gestão de pedidos e entregas de gás de cozinha.
 ## Integrantes
 - Samuel de Lima Ribeiro — função
 - Otávio Custódio — função
+- Alexandre - função
 
 ## Stack
 Java 21 • Spring Boot • Spring Data JPA • H2 • Maven
