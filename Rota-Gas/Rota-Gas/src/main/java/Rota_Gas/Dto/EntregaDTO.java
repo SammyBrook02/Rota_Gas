@@ -1,4 +1,4 @@
 package Rota_Gas.Dto;
 
-public class EntregaDTo {
+public class EntregaDTO {
 }
