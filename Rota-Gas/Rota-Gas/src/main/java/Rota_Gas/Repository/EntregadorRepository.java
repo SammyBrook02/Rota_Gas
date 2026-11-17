@@ -1,4 +1,4 @@
 package Rota_Gas.Repository;
 
-public class EntregadorRepository {
+public interface EntregadorRepository {
 }
