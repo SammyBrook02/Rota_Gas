@@ -1,9 +1,11 @@
 package Rota_Gas.Controller;
 
-
 import jakarta.persistence.Entity;
+import org.springframework.stereotype.Controller;
+
 
 @Entity
+@Controller
 public class ClienteController {
     private Long  id;
     private String nome;
