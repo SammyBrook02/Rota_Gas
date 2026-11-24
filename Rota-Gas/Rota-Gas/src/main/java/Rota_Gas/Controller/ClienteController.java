@@ -2,6 +2,7 @@ package Rota_Gas.Controller;
 
 import Rota_Gas.Entities.Cliente;
 import Rota_Gas.Repository.ClienteRepository;
+import Rota_Gas.Service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,51 +13,40 @@ import java.util.List;
 @RequestMapping("/clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteService clienteService;
 
     @GetMapping
     public List<Cliente> listar() {
-        return clienteRepository.findAll();
+        return clienteService.listarClientes();
     }
 
    @GetMapping("/{id}")
     public ResponseEntity<Cliente> buscar(@PathVariable Long id) {
-        return clienteRepository.findById(id)
-                .map(ResponseEntity::ok).
-                orElse(ResponseEntity.notFound().
-                        build());
-
-
+        return ResponseEntity.ok(clienteService.buscarClientePorId(id));
    }
 
    @PostMapping
     public Cliente criar (@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+        return clienteService.salvarClientes(cliente);
    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente dados) {
-        return clienteRepository.findById(id).map(cliente -> {
-            cliente.setNome(dados.getNome());
-            cliente.setEndereco(dados.getEndereco());
-            cliente.setComplemento(dados.getComplemento());
-            cliente.setCep(dados.getCep());
-            cliente.setTelefone(dados.getTelefone());
-            return ResponseEntity.ok(clienteRepository.save(cliente));
-        }).orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok(clienteService.atualizarCliente( id, dados));
+
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletar(@PathVariable Long id) {
-        if  (!clienteRepository.existsById(id)) {
-            return  ResponseEntity.notFound().build();
+        if (!clienteService.deletarCliente(id)) {
+            return ResponseEntity.notFound().build();
         }
-
-        clienteRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
-}
+
+    }
+
 
 
 
