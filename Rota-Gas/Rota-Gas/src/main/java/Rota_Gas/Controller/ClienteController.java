@@ -1,9 +1,7 @@
 package Rota_Gas.Controller;
 
 import Rota_Gas.Entities.Cliente;
-import Rota_Gas.Repository.ClienteRepository;
 import Rota_Gas.Service.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,7 +31,6 @@ public class ClienteController {
     @PutMapping("/{id}")
     public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente dados) {
         return ResponseEntity.ok(clienteService.atualizarCliente( id, dados));
-
 
     }
 
