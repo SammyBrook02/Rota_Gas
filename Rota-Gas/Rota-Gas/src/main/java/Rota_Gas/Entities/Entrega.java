@@ -1,10 +1,8 @@
 package Rota_Gas.Entities;
 
-import Rota_Gas.Controller.EntregaController;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 public class Entrega {
@@ -17,6 +15,20 @@ public class Entrega {
     private String cep;
     private String numero;
     private String complemento;
+
+    @OneToOne
+    @JoinColumn(name = "pedido_id", nullable = false)
+    private Pedido pedido;
+
+    @ManyToOne
+    @JoinColumn(name = "entregador_id")
+    private Entregadores entregador;
+
+    private LocalDateTime saidaParaEntrega;
+    private LocalDateTime dataEntrega;
+
+    @Enumerated(EnumType.STRING)
+    private StatusEntrega status = StatusEntrega.AGUARDANDO;
 
 
     public Entrega(){
@@ -69,5 +81,45 @@ public class Entrega {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    public Entregadores getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(Entregadores entregador) {
+        this.entregador = entregador;
+    }
+
+    public LocalDateTime getSaidaParaEntrega() {
+        return saidaParaEntrega;
+    }
+
+    public void setSaidaParaEntrega(LocalDateTime saidaParaEntrega) {
+        this.saidaParaEntrega = saidaParaEntrega;
+    }
+
+    public LocalDateTime getDataEntrega() {
+        return dataEntrega;
+    }
+
+    public void setDataEntrega(LocalDateTime dataEntrega) {
+        this.dataEntrega = dataEntrega;
+    }
+
+    public StatusEntrega getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEntrega status) {
+        this.status = status;
     }
 }
