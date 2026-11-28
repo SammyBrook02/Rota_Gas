@@ -19,7 +19,7 @@ public class Entregadores {
     private Boolean disponiblidade = true;
     private LocalDate data = LocalDate.now();
 
-    @OneToMany(mappedBy = "Entregador")
+    @OneToMany(mappedBy = "entregador")
     private List<Entrega> entregas = new ArrayList<>();
 
     public Entregadores() {
